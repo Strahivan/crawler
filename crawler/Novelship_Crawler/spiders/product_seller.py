@@ -2,8 +2,8 @@ from scrapy.spider import BaseSpider
 from scrapy.selector import HtmlXPathSelector
 from Novelship_Crawler.items import NovelshipCrawlerItem
 
-class MySpider(BaseSpider):
-    name = "carousell"
+class productSpider(BaseSpider):
+    name = "product"
     allowed_domains = ["carousell.org"]
     # start_urls = ["https://carousell.com/allen895/"]
     start_urls = ["https://carousell.com/p/supreme-balck-bogo-hoody-131465119/?ref=profile&ref_referrer=%2Fallen895%2F&ref_sId=4093106"]
@@ -12,8 +12,8 @@ class MySpider(BaseSpider):
 
     def parse(self, response):
         hxs = HtmlXPathSelector(response)
-
         items = []
+        # the HtmlXPathSelector.select() method returns a list of new selectors for a given xPath
         desc = hxs.select("//html/body/div[2]/div/div[1]/div[2]/div/div[3]/div[2]/section/div/div/div[1]/article")
 
         for desc in desc:
@@ -24,6 +24,7 @@ class MySpider(BaseSpider):
             item ["location"] = desc.select("div/div[3]/span/text()").extract()
             items.append(item)
             return items
+
             # price = desc.select("a/@href").extract()
 
 
