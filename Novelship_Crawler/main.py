@@ -11,6 +11,10 @@ app = Flask(__name__)
 spi = dynamicSpider()
 process = CrawlerProcess()
 
+if __name__ == 'Novelship_Crawler.main':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
@@ -20,7 +24,7 @@ def crawlSeller(domain, account_id):
     crawlURL = 'https://'+domain+ '.com/'+account_id
     process.crawl(spi, start_urls=['https://'+domain+ '.com/'+account_id])
     process.start()
-        
+
     #To-Do send .json response
 
     #runner = CrawlerRunner()
