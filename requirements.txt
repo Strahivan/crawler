@@ -4,6 +4,7 @@ Automat==0.6.0
 cffi==1.11.2
 click==6.7
 constantly==15.1.0
+crc16==0.1.1
 cryptography==2.1.2
 cssselect==1.0.1
 enum34==1.1.6
@@ -22,9 +23,11 @@ pyasn1-modules==0.1.5
 pycparser==2.18
 PyDispatcher==2.0.5
 pyOpenSSL==17.3.0
+python-redis==0.1.7
 queuelib==1.4.2
+redis==2.10.6
+rq==0.9.0
 Scrapy==1.4.0
-scrapy-splash==0.7.2
 service-identity==17.0.0
 six==1.11.0
 Twisted==17.9.0
