@@ -4,7 +4,6 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 from Novelship_Crawler.items import NovelshipCrawlerItem
 from scrapy.linkextractors import LinkExtractor
 from scrapy.selector import HtmlXPathSelector
-from scrapy_splash import SplashRequest
 
 class sellerSpider(CrawlSpider):
     name = 'seller'

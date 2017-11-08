@@ -17,15 +17,7 @@ NEWSPIDER_MODULE = 'Novelship_Crawler.spiders'
 # how deep to crawl
 DEPTH_LIMIT = 1
 
-# needed for splash
-SPLASH_URL = 'http://192.168.59.103:8050'
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
-#    'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
-#    'Novelship_Crawler.middlewares.ProxyMiddleware': 100
-}
+
 
 SPIDER_MIDDLEWARES = {
     'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,

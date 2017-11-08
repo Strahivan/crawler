@@ -4,12 +4,16 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 from Novelship_Crawler.items import NovelshipCrawlerItem
 from scrapy.linkextractors import LinkExtractor
 from scrapy.selector import HtmlXPathSelector
-from scrapy_splash import SplashRequest
 
 class dynamicSpider(CrawlSpider):
     name = 'dynamic'
     allowed_domains = ['carousell.com']
     start_urls = ['https://carousell.com/khvnmrkt/']#, 'https://carousell.com/allen895/']
+
+
+    def __init__(self, *args, **kwargs):
+        super(dynamicSpider, self).__init__(*args, **kwargs)
+        self.start_urls.append(kwargs.get('url'))
 
     rules = (Rule (LinkExtractor(allow=(''),
     restrict_xpaths=('//*[@id="productCardThumbnail"]'))
