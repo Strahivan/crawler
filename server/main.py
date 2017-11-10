@@ -39,9 +39,9 @@ def run_job():
     url_LIST = rdhandler.execute_jobs()
     app.logger.info('here is what happend: %s' , url_LIST)
 
-    #for ur in url_LIST:
-    payload = {'project': 'Novelship_Crawler', 'spider': 'dynamic' , 'url': url_LIST }
-    r = requests.post("http://localhost:6800/schedule.json", data=payload)
+    for ur in url_LIST:
+        payload = {'project': 'Novelship_Crawler', 'spider': 'dynamic' , 'url': ur }
+        r = requests.post("http://localhost:6800/schedule.json", data=payload)
 
         # http://localhost:6800/schedule.json -d project=Novelship_Crawler -d spider=dynamic -d url= https://carousell.com/supremec1/
     return r.text
