@@ -38,7 +38,7 @@ class redishandler():
             generic_beginning = "rq:job:" + var3
 
             # get redis value for key
-            overall_information = redis_conn.hgetall(generic_beginning)
+            overall_information = conn.hgetall(generic_beginning)
             descc = overall_information.get('description')
             #prepare value / the url for crawling and return it as a list
             clean_val = descc.replace("()", "")
