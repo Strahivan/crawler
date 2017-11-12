@@ -1,4 +1,5 @@
 import os
+import urlparse
 from redis import Redis
 from rq import Queue
 
