@@ -1,12 +1,9 @@
-import os
+
 from redis import Redis
 from rq import Queue
 
-redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
-redis = redis.from_url(redis_url)
-
-#redis_conn = Redis()
-q = Queue(connection=redis)
+redis_conn = Redis()
+q = Queue(connection=redis_conn)
 
 class redishandler():
 
