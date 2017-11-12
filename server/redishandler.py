@@ -1,9 +1,15 @@
-
+import os
 from redis import Redis
 from rq import Queue
 
-redis_conn = Redis()
-q = Queue(connection=redis_conn)
+redis_url = os.getenv('REDISTOGO_URL')
+
+urlparse.uses_netloc.append('redis')
+url = urlparse.urlparse(redis_url)
+conn = Redis(host=url.hostname, port=url.port, db=0, password=url.password)
+
+#redis_conn = Redis()
+q = Queue(connection=conn)
 
 class redishandler():
 
