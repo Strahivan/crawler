@@ -41,7 +41,7 @@ def run_job():
 
     for ur in url_LIST:
         payload = {'project': 'Novelship_Crawler', 'spider': 'dynamic' , 'url': ur }
-        r = requests.post("https://novelship-crawler.herokuapp.com:6800/schedule.json", data=payload)
+        r = requests.post("https://scrapyd-heroku.herokuapp.com/schedule.json", data=payload)
 
         # http://localhost:6800/schedule.json -d project=Novelship_Crawler -d spider=dynamic -d url= https://carousell.com/supremec1/
     return r.text
