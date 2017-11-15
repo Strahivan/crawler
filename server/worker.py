@@ -1,5 +1,10 @@
-import os
+# -*- coding: utf-8 -*-
+#
+# Autor: Strahinja Ivanovic
+#
+# Obsolete redis-queue component
 
+import os
 import redis
 from rq import Worker, Queue, Connection
 

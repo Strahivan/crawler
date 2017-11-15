@@ -5,10 +5,17 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+
+# Autor: Strahinja Ivanovic
+#
+# Modified the pipeline to access a local mongodb and insert
+# the scraped items automatically
+
 import pymongo
 
 class NovelshipCrawlerPipeline(object):
 
+    # collection of mongodb
     collection_name = 'NovelshipCrawlerItem'
 
     def __init__(self, mongo_uri, mongo_db):

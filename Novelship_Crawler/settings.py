@@ -17,9 +17,17 @@ NEWSPIDER_MODULE = 'Novelship_Crawler.spiders'
 # how deep to crawl
 DEPTH_LIMIT = 1
 
+# Needed for mongodb datapipe
 MONGO_URI = 'mongodb://localhost:27017'
 MONGO_DATABASE = 'novelship-sandbox'
 
+# Configure item pipelines
+# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+ITEM_PIPELINES = {
+    'Novelship_Crawler.pipelines.NovelshipCrawlerPipeline': 300,
+}
+
+# Needed for splash integration
 SPIDER_MIDDLEWARES = {
     'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
@@ -73,12 +81,6 @@ ROBOTSTXT_OBEY = True
 #EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
-
-# Configure item pipelines
-# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'Novelship_Crawler.pipelines.NovelshipCrawlerPipeline': 300,
-}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

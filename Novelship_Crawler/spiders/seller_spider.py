@@ -1,9 +1,15 @@
+# -*- coding: utf-8 -*-
+#
+# Autor: Strahinja Ivanovic
+#
+# Obsolete scrapy-crawl component
+
 import scrapy
 from scrapy.http import Request
+from scrapy.selector import HtmlXPathSelector
+from scrapy.linkextractors import LinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from Novelship_Crawler.items import NovelshipCrawlerItem
-from scrapy.linkextractors import LinkExtractor
-from scrapy.selector import HtmlXPathSelector
 
 class sellerSpider(CrawlSpider):
     name = 'seller'
@@ -13,11 +19,6 @@ class sellerSpider(CrawlSpider):
     rules = (Rule (LinkExtractor(allow=(''),
     restrict_xpaths=('//*[@id="productCardThumbnail"]'))
     ,callback="parse_items", follow=True),)
-
-
-    #The next To-Do is to click on the "next-page" button and crawl
-    # xPath for next-page button:
-    #/html/body/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[3]/ul/li[2]/a
 
     def parse_items(self, response):
         hxs = HtmlXPathSelector(response)
@@ -32,13 +33,3 @@ class sellerSpider(CrawlSpider):
             item ["location"] = desc.select("div/div[3]/span/text()").extract()
             items.append(item)
             return items
-
-"""
-This method here is needed for a scrapy_splash connection to re-render the .js
-relevant content because scrapy is not rendering .js content at all
-
-- But for carousell.com, that .js-rendering is not needed
-"""
-#    def start_requests(self):
-#        for url in self.start_urls:
-#            yield SplashRequest(url, self.parse_items, args={'wait': 0.5})

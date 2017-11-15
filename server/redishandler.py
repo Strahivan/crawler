@@ -1,31 +1,39 @@
+# -*- coding: utf-8 -*-
+#
+# Autor: Strahinja Ivanovic
+#
+# Generic redis-queue handler which is called by the flask-app component.
+# Contains read and write methods for the redis-job queue. We use redis-jobs
+# just to store urls which have to be crawled by scrapy.
+
 import os
 import urlparse
-from redis import Redis
 from rq import Queue
+from redis import Redis
 
+# Get environment variable for Redis (REDISTOGO_URL)
 redis_url = os.getenv('REDISTOGO_URL')
-
 urlparse.uses_netloc.append('redis')
 url = urlparse.urlparse(redis_url)
-conn = Redis(host=url.hostname, port=url.port, db=0, password=url.password)
 
-#redis_conn = Redis()
+# Connect to Redis
+conn = Redis(host=url.hostname, port=url.port, db=0, password=url.password)
 q = Queue(connection=conn)
 
 class redishandler():
 
+    # Schedules a new job with input_HTML = URL (from the HTML-Input field)
     def schedule(self, input_HTML):
         q.enqueue(input_HTML)
-        #queued_job_ids = q.job_ids
         queued_jobs = q.jobs
-        #print(q.job_ids)
         return queued_jobs
 
+    # Get a list of existing jobs in redis-queue
     def getjobs(self):
         queued_jobs = q.jobs
-        #print(q.job_ids)
         return queued_jobs
 
+    # Executes all jobs from the redis-queue
     def execute_jobs(self):
         list_of_clean_values = []
         queued_jobs = q.job_ids
@@ -43,8 +51,4 @@ class redishandler():
             #prepare value / the url for crawling and return it as a list
             clean_val = descc.replace("()", "")
             list_of_clean_values.append(clean_val)
-        return list_of_clean_values #list_of_clean_values
-
-
-
-        # http://localhost:6800/schedule.json -d project=Novelship_Crawler -d spider=dynamic -d url=https://carousell.com/supremec1/
+        return list_of_clean_values
