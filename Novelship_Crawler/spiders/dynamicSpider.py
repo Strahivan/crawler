@@ -8,12 +8,12 @@ from scrapy.selector import HtmlXPathSelector
 class dynamicSpider(CrawlSpider):
     name = 'dynamic'
     allowed_domains = ['carousell.com']
-    start_urls = ['https://carousell.com/khvnmrkt/']#, 'https://carousell.com/allen895/']
+    start_urls = ['https://carousell.com/allen895/']#, 'https://carousell.com/allen895/']
 
-
-    def __init__(self, *args, **kwargs):
-        super(dynamicSpider, self).__init__(*args, **kwargs)
-        self.start_urls.append(kwargs.get('url'))
+    # dynamic assignment of the scrapyd-url parameter
+    #def __init__(self, *args, **kwargs):
+    #    super(dynamicSpider, self).__init__(*args, **kwargs)
+    #    self.start_urls.append(kwargs.get('url'))
 
     rules = (Rule (LinkExtractor(allow=(''),
     restrict_xpaths=('//*[@id="productCardThumbnail"]'))
@@ -36,7 +36,10 @@ class dynamicSpider(CrawlSpider):
             item ["customer_id"] = desc.select("div/div[1]/a/text()").extract()
             item ["location"] = desc.select("div/div[3]/span/text()").extract()
             items.append(item)
-            return items
+            yield item
+            #yield scrapy.Request(self.main_url, callback=self.parse_items)
+
+            #return items
 
 
 #def start_req(self, domain, account_id):
